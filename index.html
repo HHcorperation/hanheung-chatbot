@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한흥철물 - 1966년 창업 3대 전통</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --iron: #1a1a1a;
+    --rust: #c0392b;
+    --amber: #e67e22;
+    --brass: #d4a017;
+    --cream: #f5f0e8;
+    --smoke: #f0ece4;
+    --steel: #4a4a4a;
+    --light-steel: #8a8a8a;
+    --white: #ffffff;
+    --shadow: 0 4px 24px rgba(0,0,0,0.15);
+    --shadow-heavy: 0 8px 40px rgba(0,0,0,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--cream);
+    color: var(--iron);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--iron);
+    color: var(--white);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-heavy);
+  }
+
+  .header-top {
+    background: var(--rust);
+    padding: 6px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .header-top a {
+    color: var(--white);
+    text-decoration: none;
+    opacity: 0.9;
+  }
+
+  .header-main {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .logo-badge {
+    width: 52px;
+    height: 52px;
+    background: var(--brass);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 900;
+    font-size: 20px;
+    color: var(--iron);
+    flex-shrink: 0;
+  }
+
+  .logo-text h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+    color: var(--white);
+  }
+
+  .logo-text p {
+    font-size: 11px;
+    color: var(--brass);
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+
+  .header-contact {
+    text-align: right;
+  }
+
+  .phone-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--amber);
+    color: var(--white);
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    transition: background 0.2s;
+  }
+
+  .phone-btn:hover { background: var(--brass); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--iron) 0%, #2d2d2d 50%, #3a2a1a 100%);
+    color: var(--white);
+    padding: 40px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 30px,
+      rgba(255,255,255,0.01) 30px,
+      rgba(255,255,255,0.01) 60px
+    );
+  }
+
+  .hero-content { position: relative; }
+
+  .hero h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(20px, 5vw, 28px);
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .hero h2 span { color: var(--brass); }
+
+  .hero p {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 24px;
+  }
+
+  .chat-trigger-btn {
+    background: var(--rust);
+    color: var(--white);
+    border: none;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 16px rgba(192,57,43,0.4);
+  }
+
+  .chat-trigger-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(192,57,43,0.5);
+  }
+
+  /* PRODUCTS SECTION */
+  .section {
+    padding: 32px 20px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--iron);
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(to right, var(--amber), transparent);
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .product-card {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border: 2px solid transparent;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: var(--amber);
+  }
+
+  .product-img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    background: var(--smoke);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+  }
+
+  .product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .product-info {
+    padding: 10px;
+  }
+
+  .product-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--iron);
+    margin-bottom: 2px;
+  }
+
+  .product-sub {
+    font-size: 11px;
+    color: var(--light-steel);
+  }
+
+  /* PRODUCT DETAIL MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 200;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .modal-overlay.active { display: flex; }
+
+  .modal {
+    background: var(--white);
+    border-radius: 20px 20px 0 0;
+    width: 100%;
+    max-width: 700px;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 24px;
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .modal-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .modal-close {
+    background: var(--smoke);
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--steel);
+  }
+
+  .modal-product-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--smoke);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+
+  .modal-product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .modal-desc {
+    font-size: 14px;
+    color: var(--steel);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .ask-about-btn {
+    width: 100%;
+    background: var(--rust);
+    color: var(--white);
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .ask-about-btn:hover { background: #a93226; }
+
+  /* INFO CARDS */
+  .info-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .info-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .info-card-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .info-card h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--iron);
+    margin-bottom: 6px;
+  }
+
+  .info-card p {
+    font-size: 12px;
+    color: var(--steel);
+    line-height: 1.6;
+  }
+
+  .info-card a {
+    color: var(--rust);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  /* CHAT WINDOW */
+  .chat-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 300;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .chat-overlay.active { display: flex; }
+
+  .chat-window {
+    background: var(--white);
+    border-radius: 20px 20px 0 0;
+    width: 100%;
+    max-width: 700px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.3s ease;
+  }
+
+  .chat-header {
+    background: var(--iron);
+    color: var(--white);
+    padding: 16px 20px;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .chat-avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--brass);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .chat-header-info h3 {
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .chat-header-info p {
+    font-size: 11px;
+    opacity: 0.7;
+  }
+
+  .chat-close {
+    margin-left: auto;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: var(--white);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .message {
+    display: flex;
+    gap: 10px;
+    max-width: 85%;
+  }
+
+  .message.user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+  }
+
+  .message-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--brass);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .message.user .message-avatar {
+    background: var(--rust);
+  }
+
+  .message-bubble {
+    background: var(--smoke);
+    padding: 12px 16px;
+    border-radius: 16px 16px 16px 4px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--iron);
+  }
+
+  .message.user .message-bubble {
+    background: var(--rust);
+    color: var(--white);
+    border-radius: 16px 16px 4px 16px;
+  }
+
+  .typing-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 12px 16px;
+    background: var(--smoke);
+    border-radius: 16px 16px 16px 4px;
+    width: fit-content;
+  }
+
+  .typing-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--light-steel);
+    border-radius: 50%;
+    animation: typingBounce 1.2s infinite;
+  }
+
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-6px); }
+  }
+
+  .chat-input-area {
+    padding: 16px;
+    border-top: 1px solid var(--smoke);
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .chat-input {
+    flex: 1;
+    border: 2px solid var(--smoke);
+    border-radius: 24px;
+    padding: 12px 18px;
+    font-size: 14px;
+    font-family: 'Noto Sans KR', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+    max-height: 80px;
+  }
+
+  .chat-input:focus { border-color: var(--amber); }
+
+  .chat-send {
+    background: var(--rust);
+    border: none;
+    color: var(--white);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+
+  .chat-send:hover { background: #a93226; }
+
+  /* FAB */
+  .fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--rust);
+    color: var(--white);
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 26px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(192,57,43,0.5);
+    z-index: 150;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .fab:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 28px rgba(192,57,43,0.6);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--iron);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    line-height: 1.8;
+    margin-top: 20px;
+  }
+
+  footer strong { color: var(--brass); }
+
+  /* QUICK REPLIES */
+  .quick-replies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0 20px 12px;
+  }
+
+  .quick-reply {
+    background: var(--smoke);
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--steel);
+  }
+
+  .quick-reply:hover {
+    background: var(--amber);
+    color: var(--white);
+    border-color: var(--amber);
+  }
+
+  @media (max-width: 480px) {
+    .products-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .product-name { font-size: 12px; }
+    .info-cards { grid-template-columns: 1fr 1fr; }
+    .header-main { padding: 12px 16px; }
+    .logo-badge { width: 44px; height: 44px; font-size: 17px; }
+    .logo-text h1 { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    <span>📍 경기 오산시 오산동 315-2 오색시장 내</span>
+    <span>⏰ 평일 08:00 ~ 19:00</span>
+  </div>
+  <div class="header-main">
+    <div class="logo-area">
+      <div class="logo-badge">한흥</div>
+      <div class="logo-text">
+        <h1>한흥철물</h1>
+        <p>1966년 창업 · 3대 전통 철물점</p>
+      </div>
+    </div>
+    <a href="tel:01047565895" class="phone-btn">
+      📞 010-4756-5895
+    </a>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <h2>60년 경험이 답해드립니다<br><span>무엇이든 물어보세요</span></h2>
+    <p>공구 · 배관 · 전기 · 건축자재 · 안전용품</p>
+    <button class="chat-trigger-btn" onclick="openChat()">💬 지금 바로 상담하기</button>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<div class="section">
+  <div class="section-title">🔧 자주 찾는 상품</div>
+  <div class="products-grid" id="productsGrid"></div>
+</div>
+
+<!-- INFO -->
+<div class="section" style="padding-top: 0;">
+  <div class="section-title">📌 매장 안내</div>
+  <div class="info-cards">
+    <div class="info-card">
+      <div class="info-card-icon">📞</div>
+      <h3>사장님 직통</h3>
+      <p><a href="tel:01047565895">010-4756-5895</a></p>
+      <p style="margin-top:4px;">긴급 문의는 전화주세요</p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-icon">🅿️</div>
+      <h3>주차 안내</h3>
+      <p>오산오색시장<br>공영주차장 이용<br>
+      <a href="https://map.naver.com/v5/search/경기 오산시 오산동 315-2" target="_blank" style="font-size:12px;">지도 보기 →</a></p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-icon">🕐</div>
+      <h3>영업시간</h3>
+      <p>평일 08:00 ~ 19:00<br>토요일 08:00 ~ 18:00<br>일요일 휴무</p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-icon">🏪</div>
+      <h3>매장 소개</h3>
+      <p>1966년 개업<br>3대째 운영 중<br>오산 지역 60년 신뢰</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>한흥철물</strong><br>
+  경기도 오산시 오산동 · 오산오색시장 내<br>
+  대표 010-4756-5895<br>
+  © 1966 한흥철물. All rights reserved.
+</footer>
+
+<!-- FAB -->
+<button class="fab" onclick="openChat()" title="상담하기">💬</button>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div class="modal-overlay" id="productModal" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle"></div>
+      <button class="modal-close" onclick="closeProductModal()">✕</button>
+    </div>
+    <div class="modal-product-img" id="modalImg"></div>
+    <p class="modal-desc" id="modalDesc"></p>
+    <button class="ask-about-btn" id="modalAskBtn">💬 이 제품에 대해 상담하기</button>
+  </div>
+</div>
+
+<!-- CHAT WINDOW -->
+<div class="chat-overlay" id="chatOverlay" onclick="closeChatOverlay(event)">
+  <div class="chat-window">
+    <div class="chat-header">
+      <div class="chat-avatar">🔧</div>
+      <div class="chat-header-info">
+        <h3>한흥철물 상담</h3>
+        <p>60년 경험 · 보통 1분 이내 답변</p>
+      </div>
+      <button class="chat-close" onclick="closeChat()">✕</button>
+    </div>
+
+    <div class="chat-messages" id="chatMessages"></div>
+
+    <div class="quick-replies" id="quickReplies">
+      <button class="quick-reply" onclick="sendQuick('재고 확인하고 싶어요')">재고 문의</button>
+      <button class="quick-reply" onclick="sendQuick('가격이 얼마예요?')">가격 문의</button>
+      <button class="quick-reply" onclick="sendQuick('주차는 어디에 하나요?')">주차 안내</button>
+      <button class="quick-reply" onclick="sendQuick('영업시간이 어떻게 되나요?')">영업시간</button>
+      <button class="quick-reply" onclick="sendQuick('배달 되나요?')">배달 문의</button>
+    </div>
+
+    <div class="chat-input-area">
+      <textarea class="chat-input" id="chatInput" placeholder="궁금한 것을 물어보세요..." rows="1"
+        onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+      <button class="chat-send" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// 설정 - Ollama 서버 주소 (필요시 변경)
+// ============================================================
+const OLLAMA_URL = 'http://localhost:11434/api/chat';
+const MODEL = 'qwen2.5:7b-instruct-q3_K_M';
+
+const SYSTEM_PROMPT = `당신은 한흥철물의 친절한 상담 직원입니다.
+한흥철물은 1966년 창업한 경기도 오산시 오산오색시장 내 3대째 운영 중인 철물점입니다.
+사장님 직통: 010-4756-5895
+주차: 오산오색시장 공영주차장 (경기 오산시 오산동 315-2)
+영업시간: 평일 08:00~19:00, 토요일 08:00~18:00, 일요일 휴무
+
+취급 품목: 전동공구, 수공구, 배관자재, 전기자재, 건축자재, 안전용품, 페인트, 나사/볼트류, 잠금장치, 측정공구 등
+
+반드시 한국어로만 답변하세요.
+짧고 친절하게 답변하세요.
+모르는 것은 "사장님께 직접 문의해주세요 (010-4756-5895)"라고 안내하세요.`;
+
+// ============================================================
+// 상품 데이터 (이미지는 나중에 실제 이미지 URL로 교체)
+// ============================================================
+const products = [
+  { name: '전동드릴', sub: '충전식/유선', emoji: '🔩', desc: '가정용부터 전문가용까지 다양한 전동드릴을 보유하고 있습니다. 브랜드별, 용량별로 구비되어 있으니 용도를 말씀해주시면 적합한 제품을 추천해 드립니다.', img: null },
+  { name: '페인트', sub: '내외부용', emoji: '🎨', desc: '수성/유성 페인트, 방수페인트, 바닥용 에폭시까지 다양하게 취급합니다. 면적과 용도를 알려주시면 필요한 양을 계산해 드립니다.', img: null },
+  { name: '배관자재', sub: '파이프/피팅', emoji: '🔧', desc: 'PVC, PE, 동관, 아연도 강관 등 각종 배관 파이프와 피팅류를 취급합니다. 치수와 수량을 알려주시면 바로 준비해 드립니다.', img: null },
+  { name: '자물쇠/잠금', sub: '도어락/열쇠', emoji: '🔐', desc: '일반 자물쇠부터 번호식, 디지털 도어락까지 다양하게 보유하고 있습니다. 설치 장소와 보안 수준에 맞는 제품을 추천해 드립니다.', img: null },
+  { name: '전선/케이블', sub: '전기자재', emoji: '⚡', desc: 'HIV전선, VCT케이블, 접지선 등 각종 전기 자재를 취급합니다. 굵기와 길이를 말씀해주시면 적합한 제품을 안내드립니다.', img: null },
+  { name: '나사/볼트류', sub: '체결자재', emoji: '⚙️', desc: '각종 나사, 볼트, 너트, 와셔를 낱개 및 박스 단위로 판매합니다. 규격을 알려주시거나 샘플을 가져오시면 맞는 제품을 찾아드립니다.', img: null },
+  { name: '안전용품', sub: '보호장비', emoji: '⛑️', desc: '안전모, 안전화, 장갑, 마스크, 보호대 등 각종 안전용품을 취급합니다. 작업 현장에 맞는 안전용품을 추천해 드립니다.', img: null },
+  { name: '측정공구', sub: '줄자/레벨기', emoji: '📏', desc: '줄자, 수평기, 레이저 레벨기, 각도기 등 측정 공구를 취급합니다. 정밀도와 용도에 맞는 제품을 안내드립니다.', img: null },
+  { name: '사다리/발판', sub: 'A형/신축형', emoji: '🪜', desc: 'A형 사다리, 신축형 사다리, 작업발판 등을 보유하고 있습니다. 높이와 용도를 알려주시면 안전한 제품을 추천해 드립니다.', img: null },
+];
+
+// 상품 렌더링
+function renderProducts() {
+  const grid = document.getElementById('productsGrid');
+  products.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.onclick = () => openProductModal(i);
+    card.innerHTML = `
+      <div class="product-img">${p.img ? `<img src="${p.img}" alt="${p.name}">` : p.emoji}</div>
+      <div class="product-info">
+        <div class="product-name">${p.name}</div>
+        <div class="product-sub">${p.sub}</div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// 상품 모달
+function openProductModal(idx) {
+  const p = products[idx];
+  document.getElementById('modalTitle').textContent = p.name;
+  document.getElementById('modalImg').innerHTML = p.img ? `<img src="${p.img}" alt="${p.name}">` : `<span style="font-size:64px">${p.emoji}</span>`;
+  document.getElementById('modalDesc').textContent = p.desc;
+  document.getElementById('modalAskBtn').onclick = () => {
+    closeProductModal();
+    openChat(`${p.name}에 대해 문의드립니다.`);
+  };
+  document.getElementById('productModal').classList.add('active');
+}
+
+function closeProductModal() {
+  document.getElementById('productModal').classList.remove('active');
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('productModal')) closeProductModal();
+}
+
+// ============================================================
+// 채팅
+// ============================================================
+let chatHistory = [];
+let isTyping = false;
+
+function openChat(prefill = '') {
+  const overlay = document.getElementById('chatOverlay');
+  overlay.classList.add('active');
+  if (chatHistory.length === 0) {
+    addMessage('bot', '안녕하세요! 한흥철물 상담 챗봇입니다 😊\n\n공구, 배관, 전기자재 등 무엇이든 물어보세요. 60년 경험으로 답변드립니다!');
+  }
+  if (prefill) {
+    document.getElementById('chatInput').value = prefill;
+  }
+  setTimeout(() => document.getElementById('chatInput').focus(), 300);
+}
+
+function closeChat() {
+  document.getElementById('chatOverlay').classList.remove('active');
+}
+
+function closeChatOverlay(e) {
+  if (e.target === document.getElementById('chatOverlay')) closeChat();
+}
+
+function addMessage(role, text) {
+  const messages = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = `message ${role === 'user' ? 'user' : 'bot'}`;
+  div.innerHTML = `
+    <div class="message-avatar">${role === 'user' ? '👤' : '🔧'}</div>
+    <div class="message-bubble">${text.replace(/\n/g, '<br>')}</div>
+  `;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+  return div;
+}
+
+function showTyping() {
+  const messages = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'message bot';
+  div.id = 'typingIndicator';
+  div.innerHTML = `
+    <div class="message-avatar">🔧</div>
+    <div class="typing-indicator">
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+    </div>
+  `;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function hideTyping() {
+  const t = document.getElementById('typingIndicator');
+  if (t) t.remove();
+}
+
+async function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text || isTyping) return;
+
+  input.value = '';
+  input.style.height = 'auto';
+  document.getElementById('quickReplies').style.display = 'none';
+
+  addMessage('user', text);
+  chatHistory.push({ role: 'user', content: text });
+
+  isTyping = true;
+  showTyping();
+
+  try {
+    const response = await fetch(OLLAMA_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: MODEL,
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          ...chatHistory
+        ],
+        stream: false
+      })
+    });
+
+    const data = await response.json();
+    const reply = data.message?.content || '죄송합니다, 잠시 후 다시 시도해주세요.';
+
+    hideTyping();
+    addMessage('bot', reply);
+    chatHistory.push({ role: 'assistant', content: reply });
+
+  } catch (err) {
+    hideTyping();
+    addMessage('bot', '현재 서버에 연결할 수 없습니다.\n사장님께 직접 문의해주세요.\n📞 010-4756-5895');
+  }
+
+  isTyping = false;
+}
+
+function sendQuick(text) {
+  document.getElementById('chatInput').value = text;
+  sendMessage();
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 80) + 'px';
+}
+
+// 초기화
+renderProducts();
+</script>
+</body>
+</html>
