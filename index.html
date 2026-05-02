@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>한흥철물 - 1966년 창업 3대 전통</title>
+<title>한흥철물 - AI 상담 서비스</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -618,31 +618,94 @@
 
   footer strong { color: var(--brass); }
 
-  /* QUICK REPLIES */
-  .quick-replies {
-    display: flex;
-    flex-wrap: wrap;
+  /* KIOSK MENU */
+  .kiosk-menu {
+    border-top: 1px solid var(--smoke);
+    padding: 14px 16px;
+    flex-shrink: 0;
+    background: var(--white);
+  }
+  .kiosk-label {
+    font-size: 11px;
+    color: var(--light-steel);
+    margin-bottom: 10px;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+  .kiosk-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 8px;
-    padding: 0 20px 12px;
   }
-
-  .quick-reply {
+  .kiosk-btn {
     background: var(--smoke);
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    padding: 7px 14px;
-    font-size: 13px;
+    border: 1.5px solid #e0dbd0;
+    border-radius: 10px;
+    padding: 10px 6px;
+    font-size: 12px;
     font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s;
-    color: var(--steel);
+    transition: all 0.18s;
+    color: var(--iron);
+    text-align: center;
+    line-height: 1.4;
   }
-
-  .quick-reply:hover {
+  .kiosk-btn:hover, .kiosk-btn:active {
     background: var(--amber);
     color: var(--white);
     border-color: var(--amber);
   }
+  .kiosk-btn.info {
+    border-color: #b0c4de;
+    background: #f0f4f8;
+  }
+  .kiosk-btn.info:hover {
+    background: #2980b9;
+    border-color: #2980b9;
+    color: var(--white);
+  }
+  .kiosk-back {
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--light-steel);
+    font-size: 12px;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 4px;
+    text-align: center;
+  }
+  .kiosk-btn.kakao {
+    background: #FEE500;
+    border-color: #FEE500;
+    color: #3C1E1E;
+    font-weight: 700;
+    grid-column: 1 / -1;
+    margin-top: 4px;
+  }
+  .kiosk-btn.kakao:hover {
+    background: #f5d800;
+    border-color: #f5d800;
+    color: #3C1E1E;
+  }
+  .kakao-link-btn {
+    display: inline-block;
+    background: #FEE500;
+    color: #3C1E1E;
+    font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-left: 42px;
+    margin-top: -8px;
+  }
+  .kakao-link-btn:hover { background: #f5d800; }
+
+  .kiosk-back:hover { color: var(--rust); }
 
   @media (max-width: 480px) {
     .products-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
@@ -667,7 +730,7 @@
       <div class="logo-badge">한흥</div>
       <div class="logo-text">
         <h1>한흥철물</h1>
-        <p>1966년 창업 · 3대 전통 철물점</p>
+        <p>오산오색시장 철물 전문점</p>
       </div>
     </div>
     <a href="tel:01088704708" class="phone-btn">
@@ -716,7 +779,7 @@
     <div class="info-card">
       <div class="info-card-icon">🏪</div>
       <h3>매장 소개</h3>
-      <p>1966년 개업<br>3대째 운영 중<br>
+      <p>오산오색시장 내<br>한흥철물</p>
     </div>
   </div>
 </div>
@@ -726,7 +789,7 @@
   <strong>한흥철물</strong><br>
   경기도 오산시 오산동 316-17<br>
   대표 010-8870-4708<br>
-  © 1966 한흥철물. All rights reserved.
+  © 한흥철물. All rights reserved.
 </footer>
 
 <!-- FAB -->
@@ -751,185 +814,27 @@
     <div class="chat-header">
       <div class="chat-avatar">🔧</div>
       <div class="chat-header-info">
-        <h3>한흥철물 상담</h3>
-    
+        <h3>한흥철물 AI 상담사</h3>
+        <p style="font-size:10px; opacity:0.7;">AI 답변은 참고용입니다 · 정확한 문의는 📞 010-8870-4708</p>
       </div>
       <button class="chat-close" onclick="closeChat()">✕</button>
     </div>
 
     <div class="chat-messages" id="chatMessages"></div>
 
-    <div class="quick-replies" id="quickReplies">
-      <button class="quick-reply" onclick="sendQuick('재고 확인하고 싶어요')">재고 문의</button>
-      <button class="quick-reply" onclick="sendQuick('가격이 얼마예요?')">가격 문의</button>
-      <button class="quick-reply" onclick="sendQuick('주차는 어디에 하나요?')">주차 안내</button>
-      <button class="quick-reply" onclick="sendQuick('영업시간이 어떻게 되나요?')">영업시간</button>
-      <button class="quick-reply" onclick="sendQuick('배달 되나요?')">배달 문의</button>
-    </div>
-
-    <div class="chat-input-area">
-      <textarea class="chat-input" id="chatInput" placeholder="궁금한 것을 물어보세요..." rows="1"
-        onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
-      <button class="chat-send" onclick="sendMessage()">➤</button>
+    <!-- 키오스크 메뉴 -->
+    <div class="kiosk-menu" id="kioskMenu">
+      <div class="kiosk-label" id="kioskLabel">📋 문의 항목을 선택하세요</div>
+      <div class="kiosk-grid" id="kioskGrid"></div>
+      <button class="kiosk-back" id="kioskBack" style="display:none" onclick="showCategories()">← 처음으로 돌아가기</button>
     </div>
   </div>
 </div>
 
 <script>
 // ============================================================
-// 설정 - Ollama 서버 주소 (필요시 변경)
+// AI 호출 없음 - 모든 답변 고정 텍스트
 // ============================================================
-const OLLAMA_URL = 'https://api.han-heung.com/api/chat';
-const MODEL = 'gemma3:4b';
-
-const SYSTEM_PROMPT = `당신은 경기도 오산시 오산오색시장 내 '한흥철물'의   베테랑 상담 직원입니다. 1966년 창업 이래 3대째 운영 중인 이 철물점의 얼굴입니다. 당신의 임무는 전문 지식과 따뜻한 태도로 고객을 응대하고, 반드시 매장으로 방문하도록 유도하는 것입니다.
-
-=== [필수 규칙] ===
-
-0. 철물 주제와 무관한 질문에 대해서는  답변을 거부하세요. 매장 방문 또는 전화(010-8870-4708)를 권해드립니다." 라고 답변하세요.
-1. 반드시 한국어로만 답변하세요. 어떠한 경우에도 다른 언어를 섞지 마세요.
-2. 가격은 절대 정확한 숫자로 제시하지 마세요. 반드시 "~대", "~부터" 같은 범위로만 표현하세요.
-3. 모든 답변 끝에는 반드시 "매장에 직접 오시면 더 자세히 상담해드립니다" 또는 "전화(010-8870-4708)로 문의하시면 빠르게 답변드립니다" 중 하나를 덧붙이세요.
-4. 모르는 내용이 나오면 "이 부분은 사장님(3대째 운영 중인 전문가)께 직접 문의드리는 것이 가장 정확합니다. 매장 방문 또는 전화(010-8870-4708)를 권해드립니다." 라고 답변하세요.
-
-=== [자재 추천 원칙 - 고객이 절대 몰랐던 정보] ===
-**1. 실리콘 선택 원칙**
-- 욕실/주방 방수: "무초산(중성) 실리콘이 냄새가 덜하고 곰팡이 방지 효과가 있습니다. 식초 냄새 나는 초산형은 환기가 잘되는 외부용입니다. 특히 주방 싱크대는 반드시 중성 실리콘을 쓰셔야 금속 부식을 막을 수 있습니다. 용도를 말씀해주시면 딱 맞는 제품을 골라드리겠습니다."
-- 외부 창틀/베란다: "외부에는 내후성이 좋은 변성 실리콘이나 우레탄 실란트가 적합합니다. 일반 실리콘은 햇빛에 갈라질 수 있거든요. 한 번 바르면 최소 3년 이상 유지되는 제품이 있고, 1년 이하로 버티는 싸구려도 있습니다. 직접 보시고 선택하시는 게 좋습니다."
--실리콘은 보통 비초산 실리콘을 사용하고 그 외에 기능성으로 바이오, 외장, 우레탄, 수성, 내열, 방화, 수중 실리콘등이 쓰이며 작업할 곳과 색상에 따라 선택할 수 있다
-
-**2. 페인트 선택 원칙**
-- 목재용: "목재에는 유성 페인트 또는 우드 스테인이 적합합니다. 수성 페인트는 목재에 잘 스며들지만, 마감이 약할 수 있어요. 용도(내부/외부)와 원하는 색감을 말씀해주시면 추천드립니다."
-- 철문/철제: "철문이나 난간에는 방청 기능이 있는 유성 페인트가 가장 좋습니다. 녹이 슨 상태라면 먼저 방청 프라이머를 발라야 해요. 면적을 대략이라도 알려주시면 필요한 양을 계산해드릴 수 있습니다."
-- 벽지/내벽 도배: "내벽에는 수성 페인트가 가장 무난합니다. 냄새가 적고 빨리 마르며, 요즘은 항균·항곰팡이 기능이 추가된 제품도 많습니다. 방 평수를 알려주시면 필요한 통 수를 계산해드릴 수 있어요."
-
-**3. 전동공구 선택 원칙**
-- 가정용 vs 전문가용: "가정에서 한 달에 한두 번 사용하신다면 3~4만원대 유선 드릴로 충분합니다. 하지만 매일 장시간 사용하신다면 메이커 충전식이 답입니다. 배터리 호환성과 AS 가능 여부도 확인하셔야 하고요."
-- 임팩트 드릴 vs 일반 드릴: "콘크리트 벽에 구멍을 뚫으실 거면 임팩트(함마) 기능이 있는 드릴이 필요합니다. 일반 드릴은 나무나 철판 정도만 뚫을 수 있어요. 어떤 벽인지 미리 확인하고 매장에 오시면 바로 시연도 가능합니다."
-
-**4. 나사/볼트/피팅류 선택 원칙**
-- "나사나 볼트를 구매하실 때는 기존에 사용하시던 샘플을 꼭 지참해 주세요. 겉보기에 비슷해도 나사산 피치(간격)가 달라서 안 맞는 경우가 많습니다. 저희는 낱개로도 판매하니 부담 없이 가져오세요."
-- "특히 자동차나 기계류에 들어가는 볼트는 강도 표시(4T, 8T 등)를 확인해야 하므로, 기존 제품을 직접 보여주시는 것이 가장 정확합니다."
-
-**5. 배관자재 선택 원칙**
-- "수도 배관은 용도(냉수/온수)에 따라 선택이 달라집니다. 온수 배관은 내열성 재질을 쓰지 않으면 변형이 올 수 있어요. 주택의 경우 일반 PB 파이프면 충분하지만, 보일러 배관은 전용 자재를 사용하셔야 합니다. 매장에 오시면 현장 사진만 보여주셔도 바로 맞는 걸로 찾아드립니다."
-
-**6. 자물쇠/도어락 선택 원칙**
-- "자물쇠는 사용 장소(실외/실내, 주택/창고)에 따라 보안 등급이 다릅니다. 외부용은 반드시 방수·방청 기능을 확인하셔야 하고요. 번호식은 배터리 수명과 비상 전원 공급 방식도 고려하셔야 합니다."
-- "도어락은 문 두께와 방향(좌열/우열)을 먼저 확인하셔야 합니다. 저희는 설치 서비스도 알선해드리니, 직접 오셔서 실물을 확인하시는 걸 추천드립니다."
-
-**7. 접착제 선택 원칙**
-- "접착제는 무조건 강한 게 좋은 게 아닙니다. 재질(나무, 금속, 플라스틱, 고무 등)에 따라 전용 제품이 따로 있고, 순간접착제는 틈새가 넓거나 유연성이 필요한 부위에는 적합하지 않아요. 어떤 재질을 어떤 재질에 붙이실 건지 말씀해주시면 딱 맞는 걸로 추천드릴 수 있습니다. 다만 정확한 건 직접 보시고 결정하시는 게 좋습니다."
-
-**8. 안전용품 선택 원칙**
-- "안전모나 안전화는 반드시 착용감을 직접 확인하셔야 합니다. 같은 규격이라도 브랜드별로 핏이 다르거든요. 특히 안전화는 발볼 사이즈가 중요하니, 매장에 방문하셔서 신어보시는 걸 강력히 권해드립니다."
-
-**9. 단열재/방음재 선택 원칙** ※ 신규 추가
-- "단열재는 사용 위치(벽, 바닥, 천장)와 시공 방식에 따라 종류가 완전히 달라집니다. 발포 우레탄폼은 틈새 충전에 적합하고, 스티로폼 단열재는 평면 시공에 쓰입니다. 방음이 목적이시라면 흡음재와 차음재가 다르므로 목적을 먼저 말씀해주세요. 매장에 오시면 시공 면적에 맞게 필요한 양을 바로 계산해드립니다."
-
-**10. 시즌별 추천 원칙**
-- 봄철(3~5월): "봄에는 창고·베란다 정리나 도색 작업을 많이 하십니다. 날씨가 따뜻해지면 페인트 건조도 빠르고 작업하기 딱 좋은 시기예요. 봄맞이 집수리 계획이 있으시면 매장에 오셔서 미리 자재를 점검해두시는 게 좋습니다."
-- 장마철(6~7월): "지금처럼 비 많이 오는 시기에는 배수관, 실리콘, 방수 테이프 수요가 많습니다. 급한 거부터 처리할 수 있는 재료부터 추천드리니 매장에 오시면 상황에 맞게 골라드립니다."
-- 여름철(8월): "에어컨 설치나 수리용 자재, 그리고 야외 작업용 자외선 차단 안전용품 수요가 많습니다. 매장에 오시면 작업 환경에 맞는 제품을 추천드립니다."
-- 가을철(9~11월): "가을은 겨울 준비를 미리 해두기 가장 좋은 시기입니다. 창문 틈새 실리콘 보강, 보일러 배관 점검, 문풍지 교체 등을 지금 해두시면 겨울에 훨씬 편하세요. 매장에 오시면 집 구조에 맞게 필요한 자재를 한 번에 챙겨드립니다."
-- 겨울철(12~2월): "난방 배관 동파 방지용 테이프와 보온재가 지금 많이 나갑니다. 집 구조에 따라 필요한 양이 달라서 매장에서 상담 후 구매하시는 게 가장 알맞습니다."
-
-**11. 현장 사진/샘플 활용 원칙**
-- 페인트: "기존에 칠한 벽면 사진만 보여주셔도 톤 매칭이 가능합니다. 직접 오시면 샘플판으로 비교해보실 수 있어요."
-- 수도꼭지: "기존 수도꼭지 사진 한 장이면 호환 여부를 90% 확인할 수 있습니다. 매장에서 함께 보시면서 고르시는 게 가장 정확합니다."
-- 자물쇠/도어락: "기존 제품 사진과 문 두께만 알려주셔도 적합한 제품을 90% 찾아드릴 수 있습니다. 하지만 직접 보고 확인하는 게 가장 확실하니 매장 방문을 권해드립니다."
-- 카카오톡 사진 전송 안내: "현장 사진이 있으시면 젊은 사장님 카카오톡(010-4756-5895)으로 보내주셔도 됩니다. 사진을 보시고 직접 확인 후 필요한 자재를 안내해드립니다."
-
-**12. 긴급 대처 원칙 (약간의 가치 제공)**
-- 수도꼭지 누수: "수도꼭지가 새는데 당장 막아야 한다면, 임시로 테프론 테이프를 감아보세요. 근본적인 해결은 매장에 오셔서 부품 확인 후 교체하는 게 좋습니다."
-- 전기 문제: "차단기가 내려가는 경우, 일단 해당 회로의 전기용품을 모두 뽑고 10분 후 재설정해보세요. 계속 내려가면 전기 자재를 매장에 가져오셔서 저희가 확인해드리겠습니다."
-- 문 잠금 문제: "문이 안 열릴 때 억지로 힘주시면 오히려 손상이 커집니다. 잠시 기름칠을 해보시고, 그래도 안 되면 매장에 오셔서 적합한 윤활제나 부품을 찾아드리겠습니다."
-
-=== [고객 응대 패턴 - 방문 유도를 위한 대화 구조] ===
-**1. 가격 문의 응대**
-- 고객: "XXX 가격 얼마예요?"
-- 답변: "정확한 금액보다는 용도에 맞는 제품을 추천해드리는 게 우선입니다. 대략적인 가격대는 0만원~0만원 사이입니다. 실물을 직접 보시면 재질·사이즈·마감 상태까지 확인하실 수 있고, 더 저렴한 대체품도 소개해드릴 수 있습니다. 매장에 한 번 들러보시는 걸 추천드립니다."
-
-**2. 재고 문의 응대**
-- 고객: "XXX 재고 있나요?"
-- 답변: "전화(010-8870-4708)로 미리 확인하시면 가장 정확합니다. 재고가 없더라도 익일 입고가 가능한지 알아봐드리겠습니다. 자주 찾는 품목은 대부분 구비하고 있으니, 방문 전에 한 번 연락주시면 더 확실하게 안내드릴 수 있습니다."
-
-**3. 배달/배송 문의 응대**
-- 고객: "배달 되나요?"
-- 답변: "네, 구매 금액과 지역에 따라 배달 가능합니다. 다만 부피가 크거나 무거운 자재(시멘트, 페인트 대용량 등)는 별도 배송비가 발생할 수 있습니다. 정확한 주소를 알려주시면 확인해드리겠습니다. 오산시 내 가까운 거리는 직접 배달도 해드리니 매장에서 상담 후 결정하시면 됩니다."
-
-**4. 영업시간 및 방문 문의 응대**
-- 고객: "몇 시까지 해요?"
-- 답변: "평일 오전 6시 30분부터 오후 6시까지, 토요일은 오후 4시까지 운영합니다. 일요일은 정기 휴무입니다. 방문 전에 전화 주시면 잠시 자리 비웠을 때 헛걸음하지 않도록 도와드리겠습니다."
-
-**5. 반품/교환 문의 응대**
-- 고객: "샀는데 사이즈가 안 맞아요. 교환 되나요?"
-- 답변: "미개봉 제품은 영수증 지참 시 구매 후 7일 이내 교환 가능합니다. 다만 절단된 배관, 배합된 페인트 등은 교환이 어려우니, 구매 전 사이즈 확인을 꼭 부탁드립니다. 애매한 부분은 사장님께서 현장에서 판단해드리니, 매장 방문 시 말씀해주세요."
-
-**6. 영업장 밖 첫 인사 (채팅 시작 시)**
-- "안녕하세요!  공구, 배관, 페인트, 나사, 안전용품까지 무엇이든 물어보세요. 제가 답변을 잘못 드린 부분은 사장님께서 직접 확인 후 전화드리기도 하니, 편하게 문의해주세요."
-
-**7. 단골/할인 문의 응대**
-- 고객: "할인 안 돼요?"
-- 답변: 제품을 직접 확인하시면 품질 차이를 아실 수 있습니다. 단골 고객님들께는 사장님께서 직접 감사 인사를 전해주시고, 필요하신 경우 특별히 챙겨드리기도 합니다. 매장에 오셔서 직접 보시고 결정하시는 게 가장 좋습니다."
-
-**8. 경쟁사 비교 문의 응대**
-- 고객: "OO마트가 더 싸던데요?"
-- 답변: 제품을 직접 확인하시면 품질 차이를 아실 수 있습니다. 비슷해 보여도 재질이나 내구성이 전혀 다를 수 있고, 저희는 구매 후에도 사장님께서 직접 AS 관련 상담을 도와드리니 매장 방문을 권해드립니다."
-
-**9. 온라인 쇼핑(쿠팡/네이버 등) 비교 문의 응대** ※ 신규 추가
-- 고객: "쿠팡에서 더 싸게 파는 것 같던데요?" / "온라인이 더 저렴하지 않나요?"
-- 답변: "온라인이 가격은 저렴해 보여도, 막상 받아보면 규격이 안 맞거나 재질이 다른 경우가 꽤 있습니다. 특히 배관 부품이나 나사류는 사진만으로는 구분이 어려워서 반품·재주문하다 보면 시간과 배송비 손해가 더 큰 경우가 많습니다. 저희 매장에서 실물을 직접 확인하고 구매하시면 그런 번거로움이 없고, 궁금한 점은 바로 여쭤보실 수 있습니다. 매장에 한 번 들러보시는 걸 추천드립니다."
-
-**10. AS 문의 응대**
-- 고객: "고장 났는데 AS 되나요?"
-- 답변: "제조사 정책에 따라 다릅니다. 구매하신 제품을 가지고 매장에 방문하시면 확인 후 처리 도와드리겠습니다."
-
-**11. 대량 구매/업자 문의 응대**
-- 고객: "업자인데 대량으로 살 수 있나요?"
-- 답변: "대량 구매는 사장님과 직접 상담하시는 게 가장 정확합니다. 필요한 품목 리스트를 준비하셔서 매장 방문 또는 전화(010-8870-4708) 주시면 견적과 재고를 확인해드리겠습니다."
-
-**12. 결제 방법 문의 응대** ※ 신규 추가
-- 고객: "카드 되나요?" / "계좌이체 되나요?"
-- 답변: "현금 및 카드 결제 모두 가능합니다. 계좌이체나 기타 결제 방식은 매장에서 확인해주시거나, 전화(010-8870-4708)로 미리 문의해주시면 정확히 안내드리겠습니다."
-
-**13. 공구 대여 문의 응대** ※ 신규 추가
-- 고객: "공구 빌릴 수 있나요?" / "잠깐만 쓸 건데 빌려주시나요?"
-- 답변: "공구 대여는 상황에 따라 사장님께서 직접 판단하십니다. 어떤 공구가 필요하신지 말씀해주시거나 매장에 방문하셔서 여쭤보시면 가능 여부를 확인해드릴 수 있습니다. 간단한 작업이라면 구매보다 저렴한 방법을 함께 찾아드릴 수도 있습니다. 전화(010-8870-4708)로 미리 문의하시면 빠르게 안내드립니다."
-
-=== [매장 핵심 정보] ===
-- 주소: 경기도 오산시 오산동 315-2 오산오색시장 내 한흥철물
-- 사장님 직통: 010-8870-4708
-- 영업시간: 평일 06:30 ~ 18:00 / 토요일 06:30 ~ 16:00 / 일요일 휴무
-- 주차: 오산오색시장 공영주차장 이용 (매장에서 도보 30초)
--- 대중교통 안내 ※ 신규 추가: "오산역(1호선)에서 버스나 택시로 10분 이내 거리입니다. 오산오색시장 정류장에서 내리시면 바로 시장 입구입니다. 정확한 버스 노선은 네이버 지도에서 '오산오색시장'으로 검색하시면 편리합니다."
-
-=== [대략적인 가격대 (참고용, 절대 고정가격 아님)] ===
-※ 아래 가격대는 시장 상황에 따라 수시로 변동됩니다. 고객에게는 반드시 "대략", "~부터", "~사이"로 표현하세요.
-- 전동드릴: 유선 3만원대, 충전식 6만원~12만원대
-- 페인트: 1L 8천원~1.5만원대, 4L 2.5만원~4만원대
-- 수도꼭지/수도배관: 기본형 1.5만원대, 고급형 4.5만원대
-- 실리콘: 개당 4천원대
-- 안전모: 1.5만원~3.5만원대
-- 작업용 장갑: 켤레당 2천원대
-- 공구세트: 2만원~6만원대
-- 사다리(A형): 3만원~8만원대
-- 전선/케이블: 1m당 500원~3천원대 (굵기에 따라 다름)
-- 나사/볼트류: 낱개 100원~500원대
-- 배관 테이프: 개당 2천원대
-- 단열재(스티로폼/우레탄폼): 용량·두께에 따라 수천원~수만원대 ※ 신규 추가
-- 문풍지/창문 틈막이: 개당 2천원~5천원대 ※ 신규 추가
-
-=== [주의사항] ===
-- 절대 신규 고객에게 할인을 약속하지 마세요. 단골 혜택은 "사장님께서 판단하실 부분"이라고 답변하세요.
-- 경쟁사와의 비교를 유도하는 질문에는 제품을 직접 확인하시면 품질 차이를 아실 수 있습니다." 라고 답변하세요.
-- AS 문의는 "제조사 정책에 따라 다릅니다. 구매하신 제품을 가지고 매장에 방문하시면 확인 후 처리 도와드리겠습니다." 라고 안내하세요.
-- 모든 가격은 반드시 "~대", "~부터", "~사이" 등의 범위 표현만 사용하세요. 정확한 단가(예: 2,500원, 3,000원)는 절대 언급하지 마세요.
-- 고객이 "빨리 답변해달라"고 할 경우에도 매장 방문 또는 전화 유도를 생략하지 마세요.
-- 챗봇의 한계를 솔직히 인정하되, "사장님께서 직접 확인해주십니다"라는 신뢰 구축 메시지를 활용하세요.
-- 온라인 쇼핑몰과 가격 비교를 요청하는 고객에게는 실물 확인과 규격 오류 리스크를 언급하며 매장 방문을 유도하세요.
-- 카카오톡 사진 전송 안내 시 젊은 사장님 번호(010-4756-5895)를 활용하세요. 챗봇은 사진을 직접 받을 수 없습니다.
-`;
 
 // ============================================================
 // 상품 데이터 (이미지는 나중에 실제 이미지 URL로 교체)
@@ -986,21 +891,67 @@ function closeModal(e) {
 }
 
 // ============================================================
-// 채팅
+// 키오스크 메뉴 데이터 - 모든 답변 고정, AI 호출 없음
 // ============================================================
-let chatHistory = [];
-let isTyping = false;
+const KAKAO_URL = 'http://pf.kakao.com/_nuHjX/chat';
 
-function openChat(prefill = '') {
-  const overlay = document.getElementById('chatOverlay');
-  overlay.classList.add('active');
-  if (chatHistory.length === 0) {
-    addMessage('bot', '안녕하세요! 한흥철물 상담 챗봇입니다 😊\n\n공구, 배관, 전기자재 등 무엇이든 물어보세요. ');
+const MENU = {
+  categories: [
+    { id: 'tool', label: '🔧 공구', sub: [
+      { label: '⚡ 전동드릴', fixed: '가정용은 유선 드릴(3만원대~)로 충분합니다.\n콘크리트 벽 작업이라면 반드시 임팩트(함마) 기능이 필요합니다.\n충전식은 6만~12만원대이며, 배터리 호환성도 확인하세요.\n\n매장에 오시면 직접 시연도 가능합니다.\n📞 재고 문의: 010-8870-4708' },
+      { label: '🔨 수공구', fixed: '망치, 스패너, 펜치, 드라이버 등 수공구를 구비하고 있습니다.\n낱개 구매도 가능하며, 용도를 말씀해 주시면 적합한 제품을 안내해드립니다.\n\n매장에 직접 오시면 확인하실 수 있습니다.\n📞 010-8870-4708' },
+      { label: '🧰 공구세트', fixed: '공구세트는 2만~6만원대로 다양하게 구비되어 있습니다.\n가정용·작업용 구성이 다르니 용도를 말씀해 주세요.\n\n매장에 오시면 세트 구성을 직접 확인하실 수 있습니다.\n📞 010-8870-4708' },
+      { label: '📏 측정공구', fixed: '줄자, 수평기, 레이저 레벨기, 각도기 등을 취급합니다.\n정밀도와 용도에 따라 선택이 달라지므로\n매장에서 직접 확인해 보시는 걸 권장합니다.\n📞 010-8870-4708' },
+      { label: '🪜 사다리', fixed: 'A형 사다리는 3만~8만원대, 신축형은 별도입니다.\n높이와 하중에 맞는 제품이 다르니\n용도를 말씀해 주시면 안전한 제품으로 안내해드립니다.\n📞 010-8870-4708' },
+      { label: '📦 재고·가격 문의', fixed: '재고와 정확한 가격은 수시로 변동됩니다.\n전화 주시면 바로 확인해드립니다.\n\n📞 010-8870-4708\n또는 아래 카카오톡 상담을 이용해 주세요.' },
+    ]},
+    { id: 'material', label: '🔩 자재', sub: [
+      { label: '나사·볼트', fixed: '나사·볼트는 반드시 기존 샘플을 지참해 주세요.\n겉모양이 비슷해도 나사산 피치가 달라 안 맞는 경우가 많습니다.\n낱개 판매도 가능합니다.\n\n📞 010-8870-4708' },
+      { label: '🔧 배관자재', fixed: '냉수와 온수 배관 자재가 다릅니다.\n온수 배관은 반드시 내열성 자재를 사용해야 변형을 막을 수 있습니다.\n보일러 배관은 전용 자재가 필요합니다.\n\n현장 사진을 가져오시면 바로 찾아드립니다.\n📞 010-8870-4708' },
+      { label: '⚡ 전선·케이블', fixed: 'HIV전선, VCT케이블 등 다양한 굵기로 구비되어 있습니다.\n1m당 500원~3천원대 (굵기에 따라 다름)\n필요한 굵기와 길이를 알려주시면 안내드립니다.\n📞 010-8870-4708' },
+      { label: '🧴 실리콘', fixed: '실내(욕실·주방)는 중성 실리콘, 외부 창틀은 변성 실리콘이 적합합니다.\n초산형(식초 냄새)은 외부용, 바이오·내열·방화 등 기능성도 있습니다.\n개당 4천원대~\n\n용도를 말씀해 주시면 맞는 제품을 골라드립니다.\n📞 010-8870-4708' },
+      { label: '🔗 접착제', fixed: '접착제는 재질에 따라 전용 제품이 있습니다.\n나무, 금속, 플라스틱, 고무 등 각각 다릅니다.\n순간접착제는 틈이 넓거나 유연성이 필요한 곳엔 부적합합니다.\n\n어떤 재질을 붙이실지 말씀해 주세요.\n📞 010-8870-4708' },
+      { label: '🧱 단열·방음', fixed: '단열재는 위치(벽·바닥·천장)에 따라 종류가 다릅니다.\n우레탄폼은 틈새 충전용, 스티로폼은 평면 시공용입니다.\n방음은 흡음재와 차음재가 목적이 다릅니다.\n\n매장에 오시면 시공 면적에 맞게 계산해드립니다.\n📞 010-8870-4708' },
+    ]},
+    { id: 'paint', label: '🎨 페인트', sub: [
+      { label: '🏠 내벽 페인트', fixed: '내벽에는 수성 페인트가 적합합니다.\n냄새가 적고 빨리 마르며 항균·항곰팡이 기능 제품도 있습니다.\n1L 8천~1.5만원대 / 4L 2.5~4만원대\n\n방 평수를 알려주시면 필요한 양을 계산해드립니다.\n📞 010-8870-4708' },
+      { label: '🚪 철재 페인트', fixed: '철문·난간에는 방청 기능의 유성 페인트가 적합합니다.\n녹이 슨 경우 먼저 방청 프라이머를 바르셔야 합니다.\n\n시공 면적을 알려주시면 필요한 양을 안내드립니다.\n📞 010-8870-4708' },
+      { label: '🌲 목재 페인트', fixed: '목재에는 우드스테인 또는 유성 페인트를 사용합니다.\n실내용과 외부용 선택이 달라집니다.\n\n용도와 원하는 색감을 말씀해 주시면 추천드립니다.\n📞 010-8870-4708' },
+      { label: '💧 방수 페인트', fixed: '옥상·욕실·베란다 방수는 전용 방수 페인트가 있습니다.\n용도에 따라 우레탄 방수, 시멘트 방수 등으로 나뉩니다.\n\n매장에서 현장 상황에 맞는 제품을 안내드립니다.\n📞 010-8870-4708' },
+    ]},
+    { id: 'lock', label: '🔐 잠금장치', sub: [
+      { label: '자물쇠', fixed: '실외용은 반드시 방수·방청 기능을 확인하세요.\n보안 등급은 사용 장소(주택/창고)에 따라 다릅니다.\n\n매장에서 용도에 맞는 제품을 골라드립니다.\n📞 010-8870-4708' },
+      { label: '도어락', fixed: '도어락 구매 전 반드시 문 두께와 방향(좌열/우열)을 확인하세요.\n번호식은 배터리 수명과 비상 전원 방식도 중요합니다.\n\n기존 제품 사진과 문 두께를 알려주시면 맞는 제품을 찾아드립니다.\n📞 010-8870-4708' },
+      { label: '💰 가격 문의', fixed: '자물쇠·도어락 가격은 종류에 따라 다양합니다.\n정확한 가격은 매장 방문 또는 전화로 확인해주세요.\n\n📞 010-8870-4708' },
+    ]},
+    { id: 'safety', label: '⛑️ 안전용품', sub: [
+      { label: '안전모', fixed: '안전모는 1.5~3.5만원대로 다양하게 구비되어 있습니다.\n브랜드별 핏이 다르므로 반드시 착용해보고 구매하시길 권합니다.\n\n매장에서 직접 확인해 보세요.\n📞 010-8870-4708' },
+      { label: '안전화', fixed: '안전화는 발볼 사이즈가 특히 중요합니다.\n같은 사이즈라도 브랜드별로 핏이 다릅니다.\n\n매장에 오셔서 직접 신어보시길 강력히 권합니다.\n📞 010-8870-4708' },
+      { label: '장갑·마스크', fixed: '작업용 장갑 켤레당 2천원대~, 마스크는 분진/방독 등 종류별로 있습니다.\n작업 환경에 맞는 제품을 안내드릴 수 있습니다.\n\n📞 010-8870-4708' },
+    ]},
+    { id: 'info', label: '📍 매장정보', sub: [
+      { label: '📍 주소', fixed: '경기도 오산시 오산동 316-17\n오산오색시장 내 한흥철물\n\n정문 들어오셔서 30m 직진\n왼편 노란 간판입니다.' },
+      { label: '🕐 영업시간', fixed: '평일 06:30 ~ 18:00\n토요일 06:30 ~ 16:00\n일요일 휴무\n\n방문 전 전화 주시면 헛걸음을 막을 수 있습니다.\n📞 010-8870-4708' },
+      { label: '🅿️ 주차', fixed: '오산오색시장 공영주차장 이용\n(매장에서 도보 약 30초)\n\n시장 후편에 위치해 있습니다.' },
+      { label: '📞 전화문의', fixed: '사장님 직통: 010-8870-4708\n\n재고 확인·대량 구매·긴급 문의는\n전화가 가장 빠릅니다.' },
+      { label: '🚗 배달', fixed: '오산시 인근 배달 가능합니다.\n대용량 자재는 별도 배송비가 발생할 수 있습니다.\n\n자세한 사항은 전화 문의 주세요.\n📞 010-8870-4708' },
+      { label: '🚌 오시는 길', fixed: '오산역(1호선)에서 버스·택시로 약 10분\n오산오색시장 정류장 하차 후 바로 시장 입구입니다.\n\n네이버지도에서 "오산오색시장" 검색 권장합니다.' },
+    ]},
+  ]
+};
+
+// ============================================================
+// 채팅 열기/닫기
+// ============================================================
+let started = false;
+
+function openChat(productName = '') {
+  document.getElementById('chatOverlay').classList.add('active');
+  if (!started) {
+    started = true;
+    addMessage('bot', '안녕하세요! 한흥철물입니다 😊\n아래 항목을 선택해 주세요.');
   }
-  if (prefill) {
-    document.getElementById('chatInput').value = prefill;
-  }
-  setTimeout(() => document.getElementById('chatInput').focus(), 300);
+  showCategories();
 }
 
 function closeChat() {
@@ -1011,6 +962,88 @@ function closeChatOverlay(e) {
   if (e.target === document.getElementById('chatOverlay')) closeChat();
 }
 
+// ============================================================
+// 키오스크 메뉴 렌더링
+// ============================================================
+function showCategories() {
+  const grid = document.getElementById('kioskGrid');
+  const label = document.getElementById('kioskLabel');
+  const back = document.getElementById('kioskBack');
+
+  label.textContent = '📋 문의 항목을 선택하세요';
+  back.style.display = 'none';
+  grid.innerHTML = '';
+
+  MENU.categories.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'kiosk-btn' + (cat.id === 'info' ? ' info' : '');
+    btn.textContent = cat.label;
+    btn.onclick = () => showSubMenu(cat);
+    grid.appendChild(btn);
+  });
+
+  // 카카오톡 상담 버튼 (항상 표시)
+  const kakaoBtn = document.createElement('button');
+  kakaoBtn.className = 'kiosk-btn kakao';
+  kakaoBtn.textContent = '💬 카카오톡 상담';
+  kakaoBtn.onclick = () => window.open(KAKAO_URL, '_blank');
+  grid.appendChild(kakaoBtn);
+}
+
+function showSubMenu(cat) {
+  const grid = document.getElementById('kioskGrid');
+  const label = document.getElementById('kioskLabel');
+  const back = document.getElementById('kioskBack');
+
+  label.textContent = cat.label + ' · 항목 선택';
+  back.style.display = 'block';
+  grid.innerHTML = '';
+
+  cat.sub.forEach(item => {
+    const btn = document.createElement('button');
+    btn.className = 'kiosk-btn' + (cat.id === 'info' ? ' info' : '');
+    btn.textContent = item.label;
+    btn.onclick = () => showAnswer(item, cat.id === 'info');
+    grid.appendChild(btn);
+  });
+
+  // 카카오톡 버튼
+  const kakaoBtn = document.createElement('button');
+  kakaoBtn.className = 'kiosk-btn kakao';
+  kakaoBtn.textContent = '💬 카카오톡 상담';
+  kakaoBtn.onclick = () => window.open(KAKAO_URL, '_blank');
+  grid.appendChild(kakaoBtn);
+}
+
+function showAnswer(item, isInfo) {
+  addMessage('user', item.label);
+  addMessage('bot', item.fixed);
+
+  // 답변 후 카카오톡 유도 메시지
+  if (!isInfo) {
+    setTimeout(() => {
+      addMessage('bot', '더 자세한 상담이 필요하시면\n카카오톡으로 문의해 주세요 👇');
+      renderKakaoInChat();
+    }, 300);
+  }
+  showCategories();
+}
+
+function renderKakaoInChat() {
+  const messages = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'message bot';
+  div.innerHTML = `
+    <div class="message-avatar">🔧</div>
+    <a href="${KAKAO_URL}" target="_blank" class="kakao-link-btn">💬 한흥철물 카카오톡 상담</a>
+  `;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+// ============================================================
+// 메시지 UI
+// ============================================================
 function addMessage(role, text) {
   const messages = document.getElementById('chatMessages');
   const div = document.createElement('div');
@@ -1021,92 +1054,9 @@ function addMessage(role, text) {
   `;
   messages.appendChild(div);
   messages.scrollTop = messages.scrollHeight;
-  return div;
 }
 
-function showTyping() {
-  const messages = document.getElementById('chatMessages');
-  const div = document.createElement('div');
-  div.className = 'message bot';
-  div.id = 'typingIndicator';
-  div.innerHTML = `
-    <div class="message-avatar">🔧</div>
-    <div class="typing-indicator">
-      <div class="typing-dot"></div>
-      <div class="typing-dot"></div>
-      <div class="typing-dot"></div>
-    </div>
-  `;
-  messages.appendChild(div);
-  messages.scrollTop = messages.scrollHeight;
-}
-
-function hideTyping() {
-  const t = document.getElementById('typingIndicator');
-  if (t) t.remove();
-}
-
-async function sendMessage() {
-  const input = document.getElementById('chatInput');
-  const text = input.value.trim();
-  if (!text || isTyping) return;
-
-  input.value = '';
-  input.style.height = 'auto';
-  document.getElementById('quickReplies').style.display = 'none';
-
-  addMessage('user', text);
-  chatHistory.push({ role: 'user', content: text });
-
-  isTyping = true;
-  showTyping();
-
-  try {
-    const response = await fetch(OLLAMA_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: MODEL,
-        messages: [
-          { role: 'system', content: SYSTEM_PROMPT },
-          ...chatHistory
-        ],
-        stream: false
-      })
-    });
-
-    const data = await response.json();
-    const reply = data.message?.content || '죄송합니다, 잠시 후 다시 시도해주세요.';
-
-    hideTyping();
-    addMessage('bot', reply);
-    chatHistory.push({ role: 'assistant', content: reply });
-
-  } catch (err) {
-    hideTyping();
-    addMessage('bot', '현재 서버에 연결할 수 없습니다.\n사장님께 직접 문의해주세요.\n📞 010-8870-4708');
-  }
-
-  isTyping = false;
-}
-
-function sendQuick(text) {
-  document.getElementById('chatInput').value = text;
-  sendMessage();
-}
-
-function handleKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    sendMessage();
-  }
-}
-
-function autoResize(el) {
-  el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 80) + 'px';
-}
-
+// ============================================================
 // 초기화
 renderProducts();
 </script>
